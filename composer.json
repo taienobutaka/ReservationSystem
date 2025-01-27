@@ -1,0 +1,7 @@
+{
+    "require": {
+        "intervention/image": "^3.11",
+        "simplesoftwareio/simple-qrcode": "^4.2",
+        "stripe/stripe-php": "^16.4"
+    }
+}

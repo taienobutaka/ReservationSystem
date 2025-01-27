@@ -1,0 +1,294 @@
+body {
+    background-color: #dddddd;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    padding: 15px 60px;
+    background-color: #dddddd;
+    margin-bottom: 5px;
+}
+
+.title-mark {
+    width: 40px;
+    height: 40px;
+    background-color: #4169E1;
+    border: 2px solid #4169E1;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-right: 20px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+.title-mark .line1,
+.title-mark .line2,
+.title-mark .line3 {
+    position: absolute;
+    height: 1px;
+    background-color: white;
+    left: 5px;
+}
+
+.title-mark .line1 {
+    width: 15px;
+    top: 10px;
+}
+
+.title-mark .line2 {
+    width: 20px;
+    top: 20px;
+}
+
+.title-mark .line3 {
+    width: 10px;
+    top: 30px;
+}
+
+.title {
+    color: #4169E1;
+    font-weight: bold;
+    font-size: 32px;
+    margin-left: 20px;
+}
+
+.title-r {
+    font-family: 'Almarai', sans-serif;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 60px;
+    gap: 60px;
+}
+
+.reservation-status {
+    width: 40%;
+}
+
+.reservation-status h2 {
+    margin-top: 55px;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.reservation-box {
+    background-color: #4169E1;
+    color: white;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.past-reservation {
+    order: 1;
+}
+
+.reservation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cancel-form {
+    margin: 0;
+}
+
+.cancel-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.reservation-info {
+    margin-top: 10px;
+}
+
+.reservation-item {
+    display: flex;
+    margin: 20px 0;
+}
+
+.reservation-item .label {
+    font-weight: bold;
+    width: 100px;
+}
+
+.reservation-item .value {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.reservation-item select,
+.reservation-item input,
+.reservation-item textarea {
+    margin-left: 65px;
+}
+
+.comment-label {
+    display: inline-block;
+    margin-bottom: 5px;
+    writing-mode: horizontal-tb; /* 横書きに設定 */
+    transform: rotate(0deg); /* 確実に横書きにするための追加 */
+    white-space: nowrap; /* テキストを折り返さない */
+}
+
+.comment-textarea {
+    width: 100%;
+    height: 100px;
+    resize: none;
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.star-rating input[type="radio"] {
+    display: none;
+}
+
+.star-rating label {
+    font-size: 2em;
+    color: #FFD700;
+    cursor: pointer;
+}
+
+.star-rating input[type="radio"]:checked~label {
+    color: #FFD700;
+}
+
+.star-rating label:hover,
+.star-rating label:hover~label {
+    color: #FFD700;
+}
+
+.favorites {
+    width: 60%;
+}
+
+.favorites h2 {
+    margin-bottom: 10px;
+    font-size: 32px;
+}
+
+.favorites p {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.favorites-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.favorites-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.shop {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+    width: calc(50% - 10px);
+    box-sizing: border-box;
+    position: relative;
+}
+
+.shop img {
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+    margin-bottom: 10px;
+}
+
+.shop h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+.shop-info {
+    font-size: 12px !important;
+    color: black !important;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+.favorite-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.favorite-btn .heart {
+    color: red;
+    font-size: 40px;
+}
+
+.detail-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4169E1;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.detail-button:hover {
+    background-color: #1C86EE;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+    .header {
+        position: static;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
+    .container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .reservation-status,
+    .favorites {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .shop {
+        width: 100%;
+    }
+}

@@ -1,0 +1,181 @@
+body {
+    background-color: #dddddd;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    position: absolute;
+    top: 30px;
+    left: 0px;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.title-mark {
+    width: 40px;
+    height: 40px;
+    background-color: #4169E1;
+    border: 2px solid #4169E1;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+.title-mark .line1,
+.title-mark .line2,
+.title-mark .line3 {
+    position: absolute;
+    height: 1px;
+    background-color: white;
+    left: 10px;
+}
+
+.title-mark .line1 {
+    width: 15px;
+    top: 10px;
+}
+
+.title-mark .line2 {
+    width: 20px;
+    top: 20px;
+}
+
+.title-mark .line3 {
+    width: 10px;
+    top: 30px;
+}
+
+.title-mark .material-symbols-outlined {
+    color: white;
+}
+
+.title {
+    color: #4169E1;
+    font-weight: bold;
+    font-size: 32px;
+    margin-left: 20px;
+}
+
+.title-r {
+    font-family: 'Almarai', sans-serif;
+    /* Almaraiフォントを適用 */
+}
+
+.back-button {
+    padding: 10px 20px;
+    background-color: #4169E1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.back-button:hover {
+    background-color: #1C86EE;
+}
+
+.registration-container {
+    width: 450px;
+    background-color: white;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    padding: 0;
+    padding-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.registration-header {
+    background-color: #4169E1;
+    color: white;
+    padding: 20px 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.registration-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.form {
+    padding: 0 20px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 0 30px;
+}
+
+.input-group .material-symbols-outlined {
+    font-size: 24px;
+    margin-right: 10px;
+    color: black;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 5px;
+    border: none;
+    border-bottom: 1.5px solid black;
+    outline: none;
+    margin-right: 10px;
+    font-size: 18px;
+    color: black;
+    background-color: transparent;
+}
+
+.input-group input::placeholder {
+    color: grey;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+button {
+    padding: 5px 15px;
+    background-color: #4169E1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 40px;
+}
+
+button:hover {
+    background-color: #1C86EE;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: center;
+}

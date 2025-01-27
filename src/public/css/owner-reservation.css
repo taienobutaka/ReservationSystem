@@ -1,0 +1,131 @@
+body {
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+    text-align: center;
+    position: relative;
+}
+
+.title {
+    color: black;
+    font-weight: bold;
+    font-size: 32px;
+    margin-left: 5px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 60px;
+}
+
+.reservation-status {
+    width: 100%;
+}
+
+.reservation-status h2 {
+    margin-top: 55px;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.reservation-box {
+    background-color: #4169E1;
+    color: white;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.past-reservation {
+    order: 1;
+}
+
+.reservation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.reservation-info-horizontal {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.reservation-item {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+}
+
+.reservation-item .label {
+    font-weight: bold;
+    width: 100px;
+}
+
+.reservation-item .value {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #1C86EE;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #4169E1;
+}
+
+.button.right {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.cancel-form {
+    margin: 0;
+}
+
+.cancel-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cancel-button .material-symbols-outlined {
+    font-size: 24px;
+    color: white;
+}
+
+.qr-code {
+    margin-top: 10px;
+    text-align: center;
+}
