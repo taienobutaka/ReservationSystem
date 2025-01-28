@@ -18,6 +18,8 @@ class UserController extends Controller
         $reservations = $user ? Reservation::where('user_id', $user->id)->with('shop')->get() : collect();
         $favorites = $user ? Favorite::where('user_id', $user->id)->with('shop.area', 'shop.genre')->get() : collect();
 
+        session()->forget('showModal'); // モーダルのセッションをクリア
+
         return view('mypage', compact('reservations', 'favorites'));
     }
 
