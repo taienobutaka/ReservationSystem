@@ -25,6 +25,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            $request->session()->forget('showModal'); // モーダルのセッションをクリア
             return redirect()->route('shop.index'); // お店一覧画面にリダイレクト
         }
 
