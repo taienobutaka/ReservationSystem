@@ -13,12 +13,14 @@ class CreateShopsTable extends Migration
             $table->string('name');
             $table->unsignedBigInteger('area_id');
             $table->unsignedBigInteger('genre_id');
+            $table->unsignedBigInteger('owner_id')->nullable(); // owner_idカラムを追加
             $table->text('description');
             $table->string('image_url');
             $table->timestamps();
 
             $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
             $table->foreign('genre_id')->references('id')->on('genres')->onDelete('cascade');
+            $table->foreign('owner_id')->references('id')->on('owners')->onDelete('cascade'); // 外部キー制約を追加
         });
     }
 

@@ -18,10 +18,7 @@ class CreateOwnersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->unsignedBigInteger('shop_id')->nullable(); // shop_idをnullableに変更
             $table->timestamps();
-
-            $table->foreign('shop_id')->references('id')->on('shops')->onDelete('cascade');
         });
     }
 

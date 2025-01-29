@@ -10,7 +10,7 @@ class Shop extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'area_id', 'genre_id', 'description', 'image_url'
+        'name', 'area_id', 'genre_id', 'description', 'image_url', 'owner_id'
     ];
 
     public function area()
@@ -30,6 +30,6 @@ class Shop extends Model
 
     public function owner()
     {
-        return $this->hasOne(ShopOwner::class);
+        return $this->belongsTo(ShopOwner::class, 'owner_id');
     }
 }

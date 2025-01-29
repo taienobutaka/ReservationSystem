@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
-use SimpleSoftwareIO\QrCode\Facades\QrCode; // 追加
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ShopOwnerController extends Controller
 {
@@ -26,10 +26,13 @@ class ShopOwnerController extends Controller
 
     public function reservations()
     {
-        // すべての店舗の予約情報を取得
-        $reservations = Reservation::all();
+        $shopOwner = Auth::guard('shop_owner')->user();
+        $shopIds = $shopOwner->shops->pluck('id');
 
-        return view('shopOwner.reservations', compact('reservations'));
+        // すべての予約を取得
+        $reservations = Reservation::whereIn('shop_id', $shopIds)->with('shop')->get();
+
+        return view('shopOwner.owner-reservation', compact('reservations'));
     }
 
     public function create()
@@ -58,13 +61,8 @@ class ShopOwnerController extends Controller
         $shop->genre_id = $genre->id;
         $shop->description = $request->input('description');
         $shop->image_url = $request->input('image');
+        $shop->owner_id = $request->input('owner');
         $shop->save();
-
-        if ($request->filled('owner')) {
-            $owner = ShopOwner::find($request->input('owner'));
-            $owner->shop_id = $shop->id;
-            $owner->save();
-        }
 
         return redirect()->route('shopOwner.dashboard')->with('success', 'お店情報が登録されました。');
     }
@@ -105,13 +103,8 @@ class ShopOwnerController extends Controller
         $shop->genre_id = $genre->id;
         $shop->description = $request->input('description');
         $shop->image_url = $request->input('image');
+        $shop->owner_id = $request->input('owner');
         $shop->save();
-
-        if ($request->filled('owner')) {
-            $owner = ShopOwner::find($request->input('owner'));
-            $owner->shop_id = $shop->id;
-            $owner->save();
-        }
 
         return redirect()->route('shopOwner.dashboard')->with('success', 'お店情報が登録されました。');
     }
@@ -138,13 +131,8 @@ class ShopOwnerController extends Controller
         $shop->genre_id = $genre->id;
         $shop->description = $request->input('description');
         $shop->image_url = $request->input('image');
+        $shop->owner_id = $request->input('owner');
         $shop->save();
-
-        if ($request->filled('owner')) {
-            $owner = ShopOwner::find($request->input('owner'));
-            $owner->shop_id = $shop->id;
-            $owner->save();
-        }
 
         return redirect()->route('shopOwner.dashboard')->with('success', 'お店情報が更新されました。');
     }
@@ -165,6 +153,8 @@ class ShopOwnerController extends Controller
 
         $shop = Shop::with('area', 'genre', 'owner')->findOrFail($request->input('shop_id'));
 
+        // オーナーが存在しない場合、$shop->ownerがnullとなり、nullのプロパティ「id」を読み取ろうとするためエラーが発生します。
+        // これを防ぐために、オーナーが存在するかどうかをチェックし、存在しない場合はnullを設定します。
         return redirect()->route('shopOwner.createShop')->withInput([
             'shop_id' => $shop->id,
             'shop_name' => $shop->name,
@@ -172,24 +162,24 @@ class ShopOwnerController extends Controller
             'genre' => $shop->genre->name,
             'image' => $shop->image_url,
             'description' => $shop->description,
-            'owner' => $shop->owner->id ?? null, // オーナーを設定
+            'owner' => $shop->owner ? $shop->owner->id : null, // オーナーが存在する場合のみIDを設定
         ]);
     }
 
     public function ownerReservation()
     {
         $shopOwner = Auth::guard('shop_owner')->user();
-        $shopId = $shopOwner->shop_id;
+        $shopIds = $shopOwner->shops->pluck('id');
 
         // すべての予約を取得
-        $reservations = Reservation::where('shop_id', $shopId)->with('shop')->get();
+        $reservations = Reservation::whereIn('shop_id', $shopIds)->with('shop')->get();
 
         return view('shopOwner.owner-reservation', compact('reservations'));
     }
 
     public function updateReservation(Request $request, $id)
     {
-        $reservation = Reservation::where('shop_id', Auth::guard('shop_owner')->user()->shop_id)->where('id', $id)->firstOrFail();
+        $reservation = Reservation::whereIn('shop_id', Auth::guard('shop_owner')->user()->shops->pluck('id'))->where('id', $id)->firstOrFail();
 
         $reservation->update([
             'start_at' => $request->input('date') . ' ' . $request->input('time') . ':00',

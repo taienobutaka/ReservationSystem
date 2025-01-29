@@ -69,14 +69,12 @@ class AdminController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:owners',
             'password' => 'required|string|min:8',
-            'shop_id' => 'nullable|integer', // 店舗IDのバリデーションを無効にする
         ]);
 
         ShopOwner::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'shop_id' => $request->shop_id,
         ]);
 
         return redirect()->route('admin.dashboard')->with('success', 'オーナーが登録されました。');
