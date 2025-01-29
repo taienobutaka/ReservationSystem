@@ -27,7 +27,6 @@ class ShopOwnerRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:owners',
             'password' => 'required|string|min:8',
-            'shop_id' => 'nullable|integer',
         ];
     }
 

@@ -9,14 +9,14 @@ class ShopOwner extends Authenticatable
 {
     use HasFactory;
 
-    protected $table = 'owners'; // テーブル名を 'owners' に設定
+    protected $table = 'owners';
 
     protected $fillable = [
-        'name', 'email', 'password', 'shop_id'
+        'name', 'email', 'password'
     ];
 
-    public function shop()
+    public function shops()
     {
-        return $this->belongsTo(Shop::class);
+        return $this->hasMany(Shop::class, 'owner_id');
     }
 }
