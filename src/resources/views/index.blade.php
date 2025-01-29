@@ -22,28 +22,31 @@
         </form>
         <h1 class="title"><span class="title-r">R</span>ese</h1>
         <div class="search-bar">
-            <div class="search-item">
-                All area <span class="arrow">▼</span>
-                <ul class="dropdown">
-                    @foreach ($areas as $area)
-                        <li><a href="?area_id={{ $area->id }}">{{ $area->name }}</a></li>
-                    @endforeach
-                </ul>
-            </div>
-            <div class="search-item">
-                All genre <span class="arrow">▼</span>
-                <ul class="dropdown">
-                    @foreach ($genres as $genre)
-                        <li><a href="?genre_id={{ $genre->id }}">{{ $genre->name }}</a></li>
-                    @endforeach
-                </ul>
-            </div>
-            <div class="search-item search-long">
-                <span class="material-symbols-outlined">search</span>
-                <form action="/" method="GET" style="display: inline;">
+            <form action="/" method="GET" style="display: flex; align-items: center;">
+                <div class="search-item">
+                    All area <span class="arrow">▼</span>
+                    <ul class="dropdown">
+                        @foreach ($areas as $area)
+                            <li><a href="#" onclick="event.preventDefault(); document.getElementById('area_id').value='{{ $area->id }}'; this.closest('form').submit();">{{ $area->name }}</a></li>
+                        @endforeach
+                    </ul>
+                    <input type="hidden" id="area_id" name="area_id" value="{{ request('area_id') }}">
+                </div>
+                <div class="search-item">
+                    All genre <span class="arrow">▼</span>
+                    <ul class="dropdown">
+                        @foreach ($genres as $genre)
+                            <li><a href="#" onclick="event.preventDefault(); document.getElementById('genre_id').value='{{ $genre->id }}'; this.closest('form').submit();">{{ $genre->name }}</a></li>
+                        @endforeach
+                    </ul>
+                    <input type="hidden" id="genre_id" name="genre_id" value="{{ request('genre_id') }}">
+                </div>
+                <div class="search-item search-long">
+                    <span class="material-symbols-outlined">search</span>
                     <input type="text" name="search" placeholder="Search..." value="{{ request('search') }}">
-                </form>
-            </div>
+                </div>
+                <button type="submit" style="display: none;"></button>
+            </form>
         </div>
     </div>
     <div class="content">
