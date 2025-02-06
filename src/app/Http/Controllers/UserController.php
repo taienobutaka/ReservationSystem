@@ -67,4 +67,23 @@ class UserController extends Controller
 
         return redirect()->route('mypage')->with('error', '予約が見つかりませんでした。');
     }
+
+    public function saveReview(Request $request)
+    {
+        $request->validate([
+            'reservation_id' => 'required|exists:reservations,id',
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'required|string|max:255',
+        ]);
+
+        $reservation = Reservation::where('id', $request->reservation_id)
+                                  ->where('user_id', Auth::id())
+                                  ->firstOrFail();
+
+        $reservation->rating = $request->rating;
+        $reservation->comment = $request->comment;
+        $reservation->save();
+
+        return redirect()->route('mypage')->with('success', 'レビューが保存されました。');
+    }
 }
