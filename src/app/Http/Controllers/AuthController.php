@@ -85,7 +85,6 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'shop_id' => $request->shop_id,
         ]);
 
         return redirect()->route('admin.dashboard')->with('success', '店舗代表者が登録されました。');
