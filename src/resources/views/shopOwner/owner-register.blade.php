@@ -45,13 +45,6 @@
             @if ($errors->has('password'))
                 <div class="error">{{ $errors->first('password') }}</div>
             @endif
-            <div class="input-group">
-                <span class="material-symbols-outlined">store</span>
-                <input type="text" name="shop_id" placeholder="Shop ID (任意)" value="{{ old('shop_id') }}">
-            </div>
-            @if ($errors->has('shop_id'))
-                <div class="error">{{ $errors->first('shop_id') }}</div>
-            @endif
             <button type="submit">登録</button>
         </form>
     </div>
