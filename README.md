@@ -289,19 +289,14 @@ STRIPE_SECRET=your_stripe_secret_key
 ```
 
 **テストデータ**
-1. 利用者<br>
-```
-name 田家信貴
-email taie0424engineer@gmail.com
-password 00000000
-```
-2. 管理者
+
+1. 管理者
 ```
 name test
 email test@gmail.com
 password 00000000
 ```
-3. オーナー
+2. オーナー
 ```
 name 山田太郎
 email yamada@gmail.com
