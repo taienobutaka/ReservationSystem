@@ -9,25 +9,6 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        // Admins table data
-        DB::table('admins')->insert([
-            [
-                'id' => 1,
-                'name' => 'test',
-                'email' => 'test@gmail.com',
-                'password' => '$2y$10$2VqtcAftQhcze32FuGt2e.cWulQa8q8yXanmqC/O/iCJivtcZ3bq',
-                'created_at' => '2025-01-28 14:18:04',
-                'updated_at' => '2025-01-28 14:18:04',
-            ],
-        ]);
-
-        // Areas table data
-        DB::table('areas')->insert([
-            ['id' => 1, 'name' => '東京都', 'created_at' => '2025-01-28 23:38:48', 'updated_at' => '2025-01-28 23:38:48'],
-            ['id' => 2, 'name' => '大阪府', 'created_at' => '2025-01-28 23:39:16', 'updated_at' => '2025-01-28 23:39:16'],
-            ['id' => 3, 'name' => '福岡県', 'created_at' => '2025-01-28 23:39:50', 'updated_at' => '2025-01-28 23:39:50'],
-        ]);
-
         // Users table data
         DB::table('users')->insert([
             [
@@ -37,6 +18,18 @@ class DatabaseSeeder extends Seeder
                 'password' => '$2y$10$VNNDbIgjLXDd6fmvMttdOeNRoRx6Oo0XWRV98oiPF8pf9nfNkDpR.',
                 'created_at' => '2025-01-29 00:12:23',
                 'updated_at' => '2025-01-29 00:12:23',
+            ],
+        ]);
+
+        // Admins table data
+        DB::table('admins')->insert([
+            [
+                'id' => 1,
+                'name' => 'test',
+                'email' => 'test@gmail.com',
+                'password' => '$2y$10$2VqtcAftQhcze32FuGt2e.cWulQa8q8yXanmqC/O/iCJivtcZ3bq',
+                'created_at' => '2025-01-28 14:18:04',
+                'updated_at' => '2025-01-28 14:18:04',
             ],
         ]);
 
@@ -68,87 +61,6 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
-        // Reservations table data
-        DB::table('reservations')->insert([
-            [
-                'id' => 1,
-                'user_id' => 1,
-                'shop_id' => 1,
-                'num_of_users' => 2,
-                'start_at' => '2025-01-06 10:00:00',
-                'rating' => null,
-                'comment' => null,
-                'created_at' => '2025-01-04 00:13:35',
-                'updated_at' => '2025-01-04 00:50:54',
-            ],
-            [
-                'id' => 5,
-                'user_id' => 1,
-                'shop_id' => 3,
-                'num_of_users' => 4,
-                'start_at' => '2025-02-06 10:00:00',
-                'rating' => null,
-                'comment' => null,
-                'created_at' => '2025-01-29 03:11:56',
-                'updated_at' => '2025-01-29 03:11:56',
-            ],
-            [
-                'id' => 6,
-                'user_id' => 1,
-                'shop_id' => 4,
-                'num_of_users' => 3,
-                'start_at' => '2025-02-06 10:00:00',
-                'rating' => 5,
-                'comment' => 'とても美味しかった。',
-                'created_at' => '2025-01-29 03:33:07',
-                'updated_at' => '2025-02-09 23:45:05',
-            ],
-            [
-                'id' => 7,
-                'user_id' => 1,
-                'shop_id' => 2,
-                'num_of_users' => 3,
-                'start_at' => '2025-02-06 10:00:00',
-                'rating' => null,
-                'comment' => null,
-                'created_at' => '2025-01-29 03:45:20',
-                'updated_at' => '2025-01-29 03:45:20',
-            ],
-            [
-                'id' => 8,
-                'user_id' => 1,
-                'shop_id' => 4,
-                'num_of_users' => 3,
-                'start_at' => '2025-02-06 10:00:00',
-                'rating' => 5,
-                'comment' => '親切な接客で、料理もとても美味しかったです。',
-                'created_at' => '2025-01-29 04:25:34',
-                'updated_at' => '2025-02-06 03:22:22',
-            ],
-            [
-                'id' => 9,
-                'user_id' => 1,
-                'shop_id' => 2,
-                'num_of_users' => 3,
-                'start_at' => '2025-07-25 19:00:00',
-                'rating' => null,
-                'comment' => null,
-                'created_at' => '2025-02-06 03:03:21',
-                'updated_at' => '2025-02-06 03:23:36',
-            ],
-            [
-                'id' => 10,
-                'user_id' => 1,
-                'shop_id' => 10,
-                'num_of_users' => 7,
-                'start_at' => '2025-05-28 09:00:00',
-                'rating' => null,
-                'comment' => null,
-                'created_at' => '2025-02-16 23:37:30',
-                'updated_at' => '2025-02-16 23:37:30',
-            ],
-        ]);
-
         // Areas table data
         DB::table('areas')->insert([
             ['id' => 1, 'name' => '東京都', 'created_at' => '2025-01-28 23:38:48', 'updated_at' => '2025-01-28 23:38:48'],
@@ -163,13 +75,6 @@ class DatabaseSeeder extends Seeder
             ['id' => 3, 'name' => '居酒屋', 'created_at' => '2025-01-28 23:39:50', 'updated_at' => '2025-01-28 23:39:50'],
             ['id' => 4, 'name' => 'イタリアン', 'created_at' => '2025-01-28 23:40:16', 'updated_at' => '2025-01-28 23:40:16'],
             ['id' => 5, 'name' => 'ラーメン', 'created_at' => '2025-01-28 23:40:46', 'updated_at' => '2025-01-28 23:40:46'],
-        ]);
-
-        // Favorites table data
-        DB::table('favorites')->insert([
-            ['id' => 1, 'user_id' => 1, 'shop_id' => 1, 'created_at' => '2025-01-28 23:38:48', 'updated_at' => '2025-01-28 23:38:48'],
-            ['id' => 2, 'user_id' => 1, 'shop_id' => 2, 'created_at' => '2025-01-28 23:39:16', 'updated_at' => '2025-01-28 23:39:16'],
-            ['id' => 3, 'user_id' => 1, 'shop_id' => 3, 'created_at' => '2025-01-28 23:39:50', 'updated_at' => '2025-01-28 23:39:50'],
         ]);
 
         // Shops table data
@@ -393,6 +298,94 @@ class DatabaseSeeder extends Seeder
                 'image_url' => 'https://coachtech-matter.s3-ap-northeast-1.amazonaws.com/image/sushi.jpg',
                 'created_at' => '2025-01-28 23:48:47',
                 'updated_at' => '2025-01-28 23:48:47',
+            ],
+        ]);
+
+        // Favorites table data
+        DB::table('favorites')->insert([
+            ['id' => 1, 'user_id' => 1, 'shop_id' => 1, 'created_at' => '2025-01-28 23:38:48', 'updated_at' => '2025-01-28 23:38:48'],
+            ['id' => 2, 'user_id' => 1, 'shop_id' => 2, 'created_at' => '2025-01-28 23:39:16', 'updated_at' => '2025-01-28 23:39:16'],
+            ['id' => 3, 'user_id' => 1, 'shop_id' => 3, 'created_at' => '2025-01-28 23:39:50', 'updated_at' => '2025-01-28 23:39:50'],
+        ]);
+
+                // Reservations table data
+        DB::table('reservations')->insert([
+            [
+                'id' => 1,
+                'user_id' => 1,
+                'shop_id' => 1,
+                'num_of_users' => 2,
+                'start_at' => '2025-01-06 10:00:00',
+                'rating' => null,
+                'comment' => null,
+                'created_at' => '2025-01-04 00:13:35',
+                'updated_at' => '2025-01-04 00:50:54',
+            ],
+            [
+                'id' => 5,
+                'user_id' => 1,
+                'shop_id' => 3,
+                'num_of_users' => 4,
+                'start_at' => '2025-02-06 10:00:00',
+                'rating' => null,
+                'comment' => null,
+                'created_at' => '2025-01-29 03:11:56',
+                'updated_at' => '2025-01-29 03:11:56',
+            ],
+            [
+                'id' => 6,
+                'user_id' => 1,
+                'shop_id' => 4,
+                'num_of_users' => 3,
+                'start_at' => '2025-02-06 10:00:00',
+                'rating' => 5,
+                'comment' => 'とても美味しかった。',
+                'created_at' => '2025-01-29 03:33:07',
+                'updated_at' => '2025-02-09 23:45:05',
+            ],
+            [
+                'id' => 7,
+                'user_id' => 1,
+                'shop_id' => 2,
+                'num_of_users' => 3,
+                'start_at' => '2025-02-06 10:00:00',
+                'rating' => null,
+                'comment' => null,
+                'created_at' => '2025-01-29 03:45:20',
+                'updated_at' => '2025-01-29 03:45:20',
+            ],
+            [
+                'id' => 8,
+                'user_id' => 1,
+                'shop_id' => 4,
+                'num_of_users' => 3,
+                'start_at' => '2025-02-06 10:00:00',
+                'rating' => 5,
+                'comment' => '親切な接客で、料理もとても美味しかったです。',
+                'created_at' => '2025-01-29 04:25:34',
+                'updated_at' => '2025-02-06 03:22:22',
+            ],
+            [
+                'id' => 9,
+                'user_id' => 1,
+                'shop_id' => 2,
+                'num_of_users' => 3,
+                'start_at' => '2025-07-25 19:00:00',
+                'rating' => null,
+                'comment' => null,
+                'created_at' => '2025-02-06 03:03:21',
+                'updated_at' => '2025-02-06 03:23:36',
+            ],
+            [
+                'id' => 10,
+                'user_id' => 1,
+                'shop_id' => 10,
+                'num_of_users' => 7,
+                'start_at' => '2025-05-28 09:00:00',
+                'rating' => null,
+                'comment' => null,
+                'created_at' => '2025-02-16 23:37:30',
+                'updated_at' => '2025-02-16 23:37:30',
             ],
         ]);
     }
