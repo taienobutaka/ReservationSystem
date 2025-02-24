@@ -149,6 +149,29 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
+        // Areas table data
+        DB::table('areas')->insert([
+            ['id' => 1, 'name' => '東京都', 'created_at' => '2025-01-28 23:38:48', 'updated_at' => '2025-01-28 23:38:48'],
+            ['id' => 2, 'name' => '大阪府', 'created_at' => '2025-01-28 23:39:16', 'updated_at' => '2025-01-28 23:39:16'],
+            ['id' => 3, 'name' => '福岡県', 'created_at' => '2025-01-28 23:39:50', 'updated_at' => '2025-01-28 23:39:50'],
+        ]);
+
+        // Genres table data
+        DB::table('genres')->insert([
+            ['id' => 1, 'name' => '寿司', 'created_at' => '2025-01-28 23:38:48', 'updated_at' => '2025-01-28 23:38:48'],
+            ['id' => 2, 'name' => '焼肉', 'created_at' => '2025-01-28 23:39:16', 'updated_at' => '2025-01-28 23:39:16'],
+            ['id' => 3, 'name' => '居酒屋', 'created_at' => '2025-01-28 23:39:50', 'updated_at' => '2025-01-28 23:39:50'],
+            ['id' => 4, 'name' => 'イタリアン', 'created_at' => '2025-01-28 23:40:16', 'updated_at' => '2025-01-28 23:40:16'],
+            ['id' => 5, 'name' => 'ラーメン', 'created_at' => '2025-01-28 23:40:46', 'updated_at' => '2025-01-28 23:40:46'],
+        ]);
+
+        // Favorites table data
+        DB::table('favorites')->insert([
+            ['id' => 1, 'user_id' => 1, 'shop_id' => 1, 'created_at' => '2025-01-28 23:38:48', 'updated_at' => '2025-01-28 23:38:48'],
+            ['id' => 2, 'user_id' => 1, 'shop_id' => 2, 'created_at' => '2025-01-28 23:39:16', 'updated_at' => '2025-01-28 23:39:16'],
+            ['id' => 3, 'user_id' => 1, 'shop_id' => 3, 'created_at' => '2025-01-28 23:39:50', 'updated_at' => '2025-01-28 23:39:50'],
+        ]);
+
         // Shops table data
         DB::table('shops')->insert([
             [
