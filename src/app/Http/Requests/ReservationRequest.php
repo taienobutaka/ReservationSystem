@@ -15,7 +15,6 @@ class ReservationRequest extends FormRequest
     public function rules()
     {
         return [
-            'shop_id' => 'required|integer|exists:shops,id',
             'date' => 'required|date|after_or_equal:' . Carbon::tomorrow()->format('Y-m-d'),
             'time' => 'required|date_format:H:i',
             'num_of_users' => 'required|integer|min:1',

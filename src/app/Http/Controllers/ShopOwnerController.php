@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ShopOwnerRequest;
+use App\Http\Requests\StoreShopRequest;
+use App\Http\Requests\UpdateShopRequest;
 use Illuminate\Http\Request;
 use App\Models\Shop;
 use App\Models\Reservation;
@@ -40,17 +43,8 @@ class ShopOwnerController extends Controller
         return view('shopOwner.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreShopRequest $request)
     {
-        $request->validate([
-            'shop_name' => 'required|string|max:255',
-            'area' => 'required|string|max:255',
-            'genre' => 'required|string|max:255',
-            'image' => 'required|string|max:255',
-            'description' => 'required|string',
-            'owner' => 'nullable|exists:owners,id', // オーナーのバリデーションを追加
-        ]);
-
         // エリアとジャンルを取得または作成
         $area = Area::firstOrCreate(['name' => $request->input('area')]);
         $genre = Genre::firstOrCreate(['name' => $request->input('genre')]);
@@ -78,17 +72,8 @@ class ShopOwnerController extends Controller
         return view('shopOwner.owner-create');
     }
 
-    public function storeShop(Request $request)
+    public function storeShop(StoreShopRequest $request)
     {
-        $request->validate([
-            'shop_name' => 'required|string|max:255',
-            'area' => 'required|string|max:255',
-            'genre' => 'required|string|max:255',
-            'image' => 'required|string|max:255',
-            'description' => 'required|string',
-            'owner' => 'nullable|exists:owners,id', // オーナーのバリデーションを追加
-        ]);
-
         if ($request->has('shop_id') && $request->input('shop_id') != '') {
             return $this->updateShop($request, $request->input('shop_id'));
         }
@@ -109,17 +94,8 @@ class ShopOwnerController extends Controller
         return redirect()->route('shopOwner.dashboard')->with('success', 'お店情報が登録されました。');
     }
 
-    public function updateShop(Request $request, $id)
+    public function updateShop(UpdateShopRequest $request, $id)
     {
-        $request->validate([
-            'shop_name' => 'required|string|max:255',
-            'area' => 'required|string|max:255',
-            'genre' => 'required|string|max:255',
-            'image' => 'required|string|max:255',
-            'description' => 'required|string',
-            'owner' => 'nullable|exists:owners,id', // オーナーのバリデーションを追加
-        ]);
-
         $shop = Shop::findOrFail($id);
 
         // エリアとジャンルを取得または作成
@@ -194,13 +170,8 @@ class ShopOwnerController extends Controller
         return view('shopOwner.owner-mail');
     }
 
-    public function sendMail(Request $request)
+    public function sendMail(ShopOwnerRequest $request)
     {
-        $request->validate([
-            'subject' => 'required|string|max:255',
-            'message' => 'required|string',
-        ]);
-
         $users = User::all();
         foreach ($users as $user) {
             Mail::raw($request->message, function ($mail) use ($user, $request) {

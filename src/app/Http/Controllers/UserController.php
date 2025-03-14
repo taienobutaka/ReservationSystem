@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReservationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Reservation;
@@ -53,7 +54,7 @@ class UserController extends Controller
         return redirect($session->url);
     }
 
-    public function updateReservation(Request $request, $id)
+    public function updateReservation(ReservationRequest $request, $id)
     {
         $reservation = Reservation::find($id);
 

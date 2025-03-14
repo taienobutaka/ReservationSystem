@@ -58,14 +58,16 @@
                     <img src="{{ $shop->image_url }}" alt="{{ $shop->name }}">
                     <h2>{{ $shop->name }}</h2>
                     <p class="shop-info">#{{ $shop->area->name }} #{{ $shop->genre->name }}</p>
-                    <a href="{{ route('shop.detail', ['shop_id' => $shop->id]) }}" class="detail-button">詳しくみる</a>
-                    <form action="{{ route('favorite.toggle') }}" method="POST" style="display: inline;">
-                        @csrf
-                        <input type="hidden" name="shop_id" value="{{ $shop->id }}">
-                        <button type="submit" class="favorite-btn {{ Auth::check() ? ($shop->favorites->where('user_id', Auth::id())->isNotEmpty() ? 'favorite' : '') : (in_array($shop->id, session('favorites', [])) ? 'favorite' : '') }}">
-                            <span class="heart">❤</span>
-                        </button>
-                    </form>
+                    <div class="button-container">
+                        <a href="{{ route('shop.detail', ['shop_id' => $shop->id]) }}" class="detail-button">詳しくみる</a>
+                        <form action="{{ route('favorite.toggle') }}" method="POST" style="display: inline;">
+                            @csrf
+                            <input type="hidden" name="shop_id" value="{{ $shop->id }}">
+                            <button type="submit" class="favorite-btn {{ Auth::check() ? ($shop->favorites->where('user_id', Auth::id())->isNotEmpty() ? 'favorite' : '') : (in_array($shop->id, session('favorites', [])) ? 'favorite' : '') }}">
+                                <span class="heart">❤</span>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             @endforeach
         @endif

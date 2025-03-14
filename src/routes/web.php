@@ -16,7 +16,7 @@ use App\Http\Middleware\ClearModalSession;
 
 // 会員登録関連のルート
 Route::get('/register', [RegisterController::class, 'create'])->name('register'); // 会員登録画面表示
-Route::post('/register', [RegisterController::class, 'store']); // 会員登録処理
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store'); // 会員登録処理
 
 // ログイン関連のルート
 Route::post('/login', [AuthController::class, 'store'])->name('login.store'); // ログイン処理

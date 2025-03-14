@@ -43,7 +43,7 @@
             @if ($errors->has('password'))
                 <div class="error">{{ $errors->first('password') }}</div>
             @endif
-            <button type="submit">ログイン</button>
+            <button type="submit" class="login-button">ログイン</button>
         </form>
     </div>
 </body>

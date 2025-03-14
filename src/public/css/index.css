@@ -16,8 +16,8 @@ body {
 .title-mark {
     width: 40px;
     height: 40px;
-    background-color: #4169E1;
-    border: 2px solid #4169E1;
+    background-color: #4169e1;
+    border: 2px solid #4169e1;
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -52,14 +52,14 @@ body {
 }
 
 .title {
-    color: #4169E1;
+    color: #4169e1;
     font-weight: bold;
     font-size: 32px;
     margin-left: 20px;
 }
 
 .title-r {
-    font-family: 'Almarai', sans-serif;
+    font-family: "Almarai", sans-serif;
 }
 
 .search-bar {
@@ -201,7 +201,7 @@ body {
     display: none;
 }
 
-.favorite-checkbox:checked+.favorite-btn .heart {
+.favorite-checkbox:checked + .favorite-btn .heart {
     color: red;
 }
 
@@ -227,7 +227,7 @@ body {
 .detail-button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #4169E1;
+    background-color: #4169e1;
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -239,7 +239,7 @@ body {
 }
 
 .detail-button:hover {
-    background-color: #1C86EE;
+    background-color: #1c86ee;
 }
 
 .modal {
@@ -281,7 +281,7 @@ body {
 }
 
 .modal-link {
-    color: #4169E1;
+    color: #4169e1;
     text-decoration: none;
     font-size: 18px;
 }
@@ -306,13 +306,59 @@ body {
     right: 10px;
     font-size: 24px;
     color: white;
-    background-color: #4169E1;
+    background-color: #4169e1;
     border-radius: 50%;
     width: 24px;
     height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media (max-width: 1000px) {
+    .content {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .shop {
+        width: 100%;
+        margin-bottom: 20px; /* 店舗間のスペースを確保 */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+    }
+
+    .shop img {
+        width: 100%;
+    }
+
+    .shop h2,
+    .shop-info {
+        width: calc(100% - 20px);
+        padding-left: 10px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .detail-button {
+        width: auto; /* ボタンの幅を自動に設定 */
+        padding: 5px 10px; /* パディングを小さく設定 */
+        margin-bottom: 10px; /* ボタン間のスペースを確保 */
+    }
+
+    .favorite-btn {
+        position: static;
+        margin-bottom: 10px;
+        margin-right: 10px; /* 右端から隙間を入れる */
+    }
 }
 
 @media (max-width: 768px) {
@@ -338,14 +384,36 @@ body {
     }
 
     .content {
+        display: flex;
+        flex-direction: column;
         padding: 10px;
     }
 
     .shop {
         width: 100%;
+        margin-bottom: 20px; /* 店舗間のスペースを確保 */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
     }
 
-    .modal-content {
-        width: 90%;
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .detail-button {
+        width: auto; /* ボタンの幅を自動に設定 */
+        padding: 5px 10px; /* パディングを小さく設定 */
+        margin-bottom: 10px; /* ボタン間のスペースを確保 */
+    }
+
+    .favorite-btn {
+        position: static;
+        margin-bottom: 10px;
+        margin-right: 40px; /* 右端から隙間を入れる */
     }
 }
