@@ -12,6 +12,11 @@
         <button onclick="location.href='{{ route('shopOwner.dashboard') }}'" class="button right">戻る</button>
     </div>
     <div class="content">
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <form action="{{ route('shopOwner.sendMail') }}" method="POST">
             @csrf
             <div class="form-group">

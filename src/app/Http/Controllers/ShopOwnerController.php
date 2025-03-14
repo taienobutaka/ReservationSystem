@@ -170,17 +170,30 @@ class ShopOwnerController extends Controller
         return view('shopOwner.owner-mail');
     }
 
-    public function sendMail(ShopOwnerRequest $request)
+    public function sendMail(Request $request)
     {
+        \Log::info('sendMail method called');
+        \Log::info('Request data: ', $request->all());
+
         $users = User::all();
+        \Log::info('Total users: ' . $users->count());
+
         foreach ($users as $user) {
-            Mail::raw($request->message, function ($mail) use ($user, $request) {
-                $mail->to($user->email)
-                     ->subject($request->subject);
-            });
+            \Log::info('Sending email to: ' . $user->email);
+            try {
+                Mail::raw($request->message, function ($mail) use ($user, $request) {
+                    $mail->to($user->email)
+                         ->subject($request->subject);
+                });
+                \Log::info('Email sent to: ' . $user->email);
+            } catch (\Exception $e) {
+                \Log::error('Failed to send email to: ' . $user->email . ' Error: ' . $e->getMessage());
+            }
         }
 
-        return redirect()->route('shopOwner.dashboard')->with('success', 'メールが送信されました。');
+        \Log::info('All emails have been sent.');
+
+        return redirect()->route('shopOwner.showMailForm')->with('success', 'メールが送信されました。');
     }
 
     public function showQRCode($id)
