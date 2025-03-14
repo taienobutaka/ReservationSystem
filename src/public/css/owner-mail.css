@@ -49,7 +49,7 @@ textarea {
 
 .button {
     padding: 10px 20px;
-    background-color: #4169E1;
+    background-color: #4169e1;
     color: white;
     border: none;
     border-radius: 5px;
@@ -58,11 +58,23 @@ textarea {
 }
 
 .button:hover {
-    background-color: #1C86EE;
+    background-color: #1c86ee;
 }
 
 .button.right {
     position: absolute;
     top: 20px;
     right: 20px;
+}
+
+.alert {
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #4caf50;
 }

@@ -18,7 +18,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('send:reservation-reminders')->cron('00 08 * * *');
+        $schedule->command('send:reservation-reminders')->cron('25 10 * * *');
         $schedule->command('command:daily-reset')->daily();
         $schedule->command('command:monthly-reset')->monthly();
     }
