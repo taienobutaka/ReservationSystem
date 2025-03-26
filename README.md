@@ -157,47 +157,53 @@ QRコードをクリックすると、利用者と照会できるようにQRコ�
 3. `docker-compose up -d --build`
 
 ``` bash
+version: "3.8"
+
 services:
-    nginx:
-        image: nginx:1.21.1
-        ports:
-            - "80:80"
-        volumes:
-            - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
-            - ./src:/var/www/html
-        depends_on:
-            - php
+  nginx:
+    image: nginx:1.21.1
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./src:/var/www
+    depends_on:
+      - php
 
-    php:
-        build: ./docker/php
-        volumes:
-            - ./src:/var/www/html
+  php:
+    build: ./docker/php
+    volumes:
+      - ./src:/var/www
 
-    mysql:
-        image: mysql:8.0.26
-        environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: laravel_db
-            MYSQL_USER: laravel_user
-            MYSQL_PASSWORD: laravel_pass
-        command:
-            mysqld --default-authentication-plugin=mysql_native_password
-        volumes:
-            - ./docker/mysql/data:/var/lib/mysql
-            - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+  mysql:
+    image: mysql:8.0.26
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: laravel_db
+      MYSQL_USER: laravel_user
+      MYSQL_PASSWORD: laravel_pass
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
 
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        environment:
-            - PMA_ARBITRARY=1
-            - PMA_HOST=mysql
-            - PMA_USER=laravel_user
-            - PMA_PASSWORD=laravel_pass
-        depends_on:
-            - mysql
-        ports:
-            - 8080:80
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PMA_USER=laravel_user
+      - PMA_PASSWORD=laravel_pass
+    depends_on:
+      - mysql
+    ports:
+      - 8080:80
 
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
 ```
 
 **Docker環境の設定**
@@ -208,32 +214,12 @@ FROM php:8.1-fpm
 COPY php.ini /usr/local/etc/php/
 
 RUN apt update \
-    && apt install -y default-mysql-client zlib1g-dev libzip-dev unzip libmagickwand-dev --no-install-recommends \
+    && apt install -y default-mysql-client zlib1g-dev libzip-dev unzip libmagickwand-dev libpng-dev libjpeg-dev imagemagick --no-install-recommends \
     && docker-php-ext-install pdo_mysql zip \
     && pecl install imagick \
     && docker-php-ext-enable imagick \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd
-
-RUN curl -sS https://getcomposer.org/installer | php \
-    && mv composer.phar /usr/local/bin/composer \
-    && composer self-update
-
-WORKDIR /var/www
-
-
-
-
-FROM php:7.4.9-fpm
-
-COPY php.ini /usr/local/etc/php/
-
-RUN apt update \
-    && apt install -y default-mysql-client zlib1g-dev libzip-dev unzip libpng-dev libjpeg-dev libfreetype6-dev \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install pdo_mysql zip gd \
-    && pecl install imagick \
-    && docker-php-ext-enable imagick
 
 RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer \
