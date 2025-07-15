@@ -44,7 +44,7 @@
 <br>
 また、予約すると利用者として登録しているメールアドレスに、予約完了メールが届きます。
 <br>
-予約完了メールには、QRコードが添付されており、店舗側と照合することができます。<br>
+予約完了メールには、QR コードが添付されており、店舗側と照合することができます。<br>
 そして、予約完了画面へと移動します。
 <br>
 予約完了画面の「戻る」ボタンをクリックすると、店舗一覧画面に戻ります。
@@ -62,12 +62,14 @@
 ![マイページ画面](<images/スクリーンショット 2025-02-10 084544.png>)
 
 予約当日の朝８時に、リマインダー機能により利用者のメールアドレスにメールが届くようになっています。
+
 ```
 protected function schedule(Schedule $schedule)
 {
     $schedule->command('send:reservation-reminders')->cron('00 08 * * *');
 }
 ```
+
 ![リマインダー](<images/スクリーンショット 2025-03-14 102829.png>)
 
 また、予約日時を過ぎると評価・コメントができるようになっています。
@@ -80,7 +82,7 @@ protected function schedule(Schedule $schedule)
 
 ![コメント反映後](<images/スクリーンショット 2025-02-06 122239.png>)
 
-そして、「会計する」ボタンをクリックすると、Stripeによる決済機能が利用できます。
+そして、「会計する」ボタンをクリックすると、Stripe による決済機能が利用できます。
 
 ![stripe](<images/スクリーンショット 2025-02-06 122311.png>)
 
@@ -122,7 +124,7 @@ protected function schedule(Schedule $schedule)
 
 作成した店舗の修正ができます。
 <br>
-店舗IDを入力すると、各項目に保存してある情報が表示します。
+店舗 ID を入力すると、各項目に保存してある情報が表示します。
 
 ![店舗修正](<images/スクリーンショット 2025-02-10 084706.png>)
 
@@ -138,9 +140,9 @@ protected function schedule(Schedule $schedule)
 
 ![予約](<images/スクリーンショット 2025-02-06 130449.png>)
 
-QRコードをクリックすると、利用者と照会できるようにQRコードが表示されます。
+QR コードをクリックすると、利用者と照会できるように QR コードが表示されます。
 <br>
-照会できるように、予約IDをQRコードにしています。
+照会できるように、予約 ID を QR コードにしています。
 
 ![qrコード](<images/スクリーンショット 2025-02-10 084919.png>)
 
@@ -148,15 +150,64 @@ QRコードをクリックすると、利用者と照会できるようにQRコ�
 
 ![メール送信](<images/スクリーンショット 2025-02-06 130405.png>)
 
-
 ## 環境構築
 
-**Dockerビルド**
-1. `git clone git@github.com:taienobutaka/ReservationSystem.git`
-2. DockerDesktopアプリを立ち上げる
-3. `docker-compose up -d --build`
+**Makefile を使用した簡単セットアップ**
 
-``` bash
+1. **リポジトリのクローン**
+
+```bash
+git clone git@github.com:taienobutaka/ReservationSystem.git
+cd ReservationSystem
+```
+
+2. **DockerDesktop アプリを立ち上げる**
+
+3. **環境構築の実行（自動化）**
+
+```bash
+make init
+```
+
+このコマンドにより以下が自動実行されます：
+
+- Docker コンテナのビルド・起動
+- PHP 依存パッケージのインストール
+- Stripe ライブラリのインストール
+- Simple QrCode ライブラリのインストール
+- .env ファイルの作成と設定
+- データベース設定の自動修正
+- MailHog 用メール設定の自動修正
+- Stripe 設定の追加
+- 画像ストレージディレクトリの作成
+- アプリケーションキーの生成
+- ストレージリンクの作成
+- 適切な権限設定
+- マイグレーションの実行
+- シーディングの実行
+
+**利用可能な Make コマンド**
+
+```bash
+make help         # 利用可能なコマンド一覧を表示
+make up           # コンテナ起動
+make down         # コンテナ停止・削除
+make restart      # コンテナ再起動
+make fresh        # データベースリフレッシュ
+make cache        # キャッシュクリア
+make shell        # PHPコンテナにログイン
+make logs         # ログ表示
+make backup       # データベースバックアップ
+make reminder     # リマインダー送信テスト
+make schedule     # スケジュール実行開始
+make qr-test      # QRコード生成テスト
+make imagick-test # ImageMagickテスト
+make clean        # 全削除（注意）
+```
+
+**Docker 構成**
+
+```yaml
 version: "3.8"
 
 services:
@@ -206,9 +257,9 @@ services:
       - "8025:8025"
 ```
 
-**Docker環境の設定**
-1. Dockerfileを使用してPHP環境を構築
-``` bash
+**PHP 環境構築（Dockerfile）**
+
+```dockerfile
 FROM php:8.1-fpm
 
 COPY php.ini /usr/local/etc/php/
@@ -228,13 +279,18 @@ RUN curl -sS https://getcomposer.org/installer | php \
 WORKDIR /var/www
 ```
 
+**※ 従来の手動セットアップ方法**
 
-**Laravel環境構築**
+<details>
+<summary>手動で環境構築を行いたい場合はこちらを参照</summary>
+
+**Laravel 環境構築**
+
 1. `docker-compose exec php bash`
-2. phpコンテナ内でhtmlファイルを作成
-3. htmlファイルに移動して、`composer install`
-4. 「.env.example」ファイルを 「.env」ファイルに命名を変更。または、新しく.envファイルを作成
-5. .envに以下の環境変数を追加
+2. php コンテナ内で`composer install`
+3. env.example」ファイルを 「.env」ファイルに命名を変更。または、新しく.env ファイルを作成
+4. 「.env に以下の環境変数を追加
+
 ```
 DB_CONNECTION=mysql
 DB_HOST=mysql
@@ -243,7 +299,9 @@ DB_DATABASE=laravel_db
 DB_USERNAME=laravel_user
 DB_PASSWORD=laravel_pass
 ```
-6. MailHogの設定
+
+6. MailHog の設定
+
 ```
 MAIL_MAILER=smtp
 MAIL_HOST=mailhog
@@ -254,96 +312,121 @@ MAIL_ENCRYPTION=null
 MAIL_FROM_ADDRESS="メールアドレス"
 MAIL_FROM_NAME="${APP_NAME}"
 ```
+
 7. アプリケーションキーの作成
-``` bash
+
+```bash
 php artisan key:generate
 ```
 
 8. マイグレーションの実行
-``` bash
+
+```bash
 php artisan migrate
 ```
 
 9. シーディングの実行
-``` bash
+
+```bash
 php artisan db:seed
 ```
 
 **リマインダー**
-1. コマンドの作成<br>
-リマインダーを送信するためのカスタムコマンドを作成
 
-``` bash
+1. コマンドの作成<br>
+   リマインダーを送信するためのカスタムコマンドを作成
+
+```bash
 php artisan make:command SendReservationReminders
 ```
 
 2. メールクラスの作成<br>
-リマインダーのメールを送信するためのMailableクラスを作成
-``` bash
+   リマインダーのメールを送信するための Mailable クラスを作成
+
+```bash
 php artisan make:mail ReservationReminder
 ```
 
 3. リマインダーの実行
-``` bash
+
+```bash
 php artisan schedule:work
 ```
+
 **認証メール**
+
 1. カスタムメール通知を設定
-``` bash
+
+```bash
 php artisan make:notification VerifyEmail
 ```
 
 **予約完了メール**
+
 1. メールクラスの作成<br>
-予約完了メールを送信するためのMailableクラスを作成
-``` bash
+   予約完了メールを送信するための Mailable クラスを作成
+
+```bash
 php artisan make:mail ReservationMail
 ```
 
-**Simple QrCodeの設定**
+**Simple QrCode の設定**
+
 1. 必要なパッケージのインストール<br>
-Simple QrCodeパッケージをインストール
-``` bash
+   Simple QrCode パッケージをインストール
+
+```bash
 composer require simplesoftwareio/simple-qrcode
 ```
+
 **Stripe（テスト環境）の設定**
-1. Stripeのインストール<br>
-StripeのPHPライブラリをインストール
+
+1. Stripe のインストール<br>
+   Stripe の PHP ライブラリをインストール
+
 ```
 composer require stripe/stripe-php
 ```
 
 2. 環境設定ファイルの更新<br>
-`.env`ファイルにStripeのAPIキーを追加
+   `.env`ファイルに Stripe の API キーを追加
+
 ```
 STRIPE_KEY=your_stripe_key
 STRIPE_SECRET=your_stripe_secret_key
 ```
 
+</details>
+
 ## 使用技術(実行環境)
+
 - PHP 8.1.31
 - Laravel 8.83.29
 - MySQL 8.0.26
 
-## ER図
+## ER 図
+
 ![alt text](<images/スクリーンショット 2025-03-14 085500.png>)
 
 ## 機能一覧
+
 ![alt text](<images/スクリーンショット 2025-02-10 231957-1.png>)
 ![alt text](<images/スクリーンショット 2025-02-10 231927.png>)
 
 ## テーブル仕様
+
 ![alt text](<images/スクリーンショット 2025-02-12 091514.png>)
 
 ## 基本設計
+
 ![alt text](<images/スクリーンショット 2025-02-10 164341.png>)
 ![alt text](<images/スクリーンショット 2025-02-10 231107.png>)
 ![alt text](<images/スクリーンショット 2025-02-10 231044.png>)
 
 ## URL
+
 - 開発環境：http://localhost/
 - 店舗一覧画面：http://localhost/
 - 管理者登録画面：http://localhost/admin-register
 - 店舗代表者登録：http://localhost/owner-register
 - phpMyAdmin:：http://localhost:8080/
-
